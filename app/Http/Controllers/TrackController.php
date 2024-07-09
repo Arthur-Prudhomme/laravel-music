@@ -20,8 +20,16 @@ class TrackController extends Controller
         return Inertia::render('Track/create');
     }
 
-    public function store(){
-        dd('store');
+    public function store(Request $request){
+        $request->validate([
+            'title' => ['required', 'min:5'],
+            'artist' => ['required', 'min:5'],
+            'display' => ['required'],
+            'image' => ['required'],
+            'audio' => ['required'],
+        ]);
+
+        return redirect()->back();
     }
 
     public function show(){
