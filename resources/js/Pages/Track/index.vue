@@ -2,10 +2,15 @@
 	<MusicLayout>
 		<template #content>
 			<h1>Liste de mes tracks</h1>
+			<input
+				v-model="filter"
+				type="search"
+				class="shadow border rounded w-full"
+			/>
 			<br />
 			<div class="grid grid-cols-4 gap-4">
 				<Track
-					v-for="track in tracks"
+					v-for="track in filteredTracks"
 					:key="track.uuid"
 					:track="track"
 					@played="play"
@@ -29,7 +34,17 @@ export default {
 		return {
 			audio: null,
 			currentTrack: null,
+			filter: "",
 		};
+	},
+	computed: {
+		filteredTracks() {
+			return this.tracks.filter(
+				(track) =>
+					track.title.toLowerCase().includes(this.filter.toLowerCase()) ||
+					track.artist.toLowerCase().includes(this.filter.toLowerCase())
+			);
+		},
 	},
 	methods: {
 		play(track) {
