@@ -31,14 +31,12 @@
 <script>
 import Track from "@/Components/Track.vue";
 import MusicLayout from "@/Layouts/MusicLayout.vue";
-import { Link } from "@inertiajs/vue3";
 
 export default {
 	name: "Index",
 	components: {
 		MusicLayout,
 		Track,
-		Link,
 	},
 	props: { tracks: Array },
 	data() {

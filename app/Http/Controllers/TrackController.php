@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Track;
 use Inertia\Inertia;
+use Illuminate\Support\Str;
 
 class TrackController extends Controller
 {
@@ -26,18 +27,37 @@ class TrackController extends Controller
             'artist' => ['required', 'string', 'min:3','max:255'],
             'display' => ['required', 'boolean'],
             'image' => ['required', 'image', 'mimes:jpg,png,svg', 'max:10000'],
-            'audio' => ['required', 'file', 'mimes:mp3,wav', 'max:10000'],
+            'music' => ['required', 'file', 'mimes:mp3,wav', 'max:10000'],
         ]);
 
-        return redirect()->back();
+        $uuid = 'trk-' . Str::uuid();
+
+        $imageExt = $request->image->extension();
+        $imagePath = $request->image->storeAs('tracks/images', $uuid . '.' . $imageExt);
+
+        $musicExt = $request->music->extension();
+        $musicPath = $request->music->storeAs('tracks/musics', $uuid . '.' . $musicExt);
+
+        Track::create([
+           'uuid' =>  $uuid,
+            'title' => $request->title,
+            'artist' => $request->artist,
+            'display' => $request->display,
+            'image' => $imagePath,
+            'music' => $musicPath
+        ]);
+
+        return redirect()->route('tracks.index');
     }
 
     public function show(){
         dd('show');
     }
 
-    public function edit(){
-        dd('edit');
+    public function edit(Track $track){
+        // dd($track);
+        
+        return Inertia::render('Track/edit');
     }
 
     public function update(){

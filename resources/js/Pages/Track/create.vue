@@ -68,14 +68,14 @@
 
 				<!-- audio -->
 				<div class="mb-3">
-					<label for="audio" class="block">Musique</label>
+					<label for="music" class="block">Musique</label>
 					<input
-						@input="form.audio = $event.target.files[0]"
+						@input="form.music = $event.target.files[0]"
 						type="file"
-						name="audio"
-						id="audio"
+						name="music"
+						id="music"
 					/>
-					<p class="text-red-500 text-xs italic">{{ form.errors.audio }}</p>
+					<p class="text-red-500 text-xs italic">{{ form.errors.music }}</p>
 				</div>
 
 				<input
@@ -95,7 +95,6 @@
 
 <script>
 import MusicLayout from "@/Layouts/MusicLayout.vue";
-import { Link } from "@inertiajs/vue3";
 
 export default {
 	name: "Create",
@@ -105,14 +104,13 @@ export default {
 				title: "",
 				artist: "",
 				image: null,
-				audio: null,
+				music: null,
 				display: true,
 			}),
 		};
 	},
 	components: {
 		MusicLayout,
-		Link,
 	},
 	methods: {
 		submit() {
