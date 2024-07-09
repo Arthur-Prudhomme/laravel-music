@@ -1,7 +1,12 @@
 <template>
 	<MusicLayout>
 		<template #content>
-			<h1>Liste de mes tracks</h1>
+			<div class="flex flex-row justify-between">
+				<h1 class="text-4xl font-extrabold">Liste de mes tracks</h1>
+				<Link :href="route('tracks.create')" class="hover:text-blue-500">
+					Ajouter une musique
+				</Link>
+			</div>
 			<input
 				v-model="filter"
 				type="search"
@@ -23,11 +28,14 @@
 <script>
 import Track from "@/Components/Track.vue";
 import MusicLayout from "@/Layouts/MusicLayout.vue";
+import { Link } from "@inertiajs/vue3";
+
 export default {
 	name: "Index",
 	components: {
 		MusicLayout,
 		Track,
+		Link,
 	},
 	props: { tracks: Array },
 	data() {
