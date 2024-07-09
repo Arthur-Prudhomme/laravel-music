@@ -66,7 +66,7 @@
 					<p class="text-red-500 text-xs italic">{{ form.errors.image }}</p>
 				</div>
 
-				<!-- music -->
+				<!-- audio -->
 				<div class="mb-3">
 					<label for="audio" class="block">Musique</label>
 					<input
@@ -105,7 +105,7 @@ export default {
 				title: "",
 				artist: "",
 				image: null,
-				music: null,
+				audio: null,
 				display: true,
 			}),
 		};

@@ -22,11 +22,11 @@ class TrackController extends Controller
 
     public function store(Request $request){
         $request->validate([
-            'title' => ['required', 'min:5'],
-            'artist' => ['required', 'min:5'],
-            'display' => ['required'],
-            'image' => ['required'],
-            'audio' => ['required'],
+            'title' => ['required', 'string', 'min:5','max:255'],
+            'artist' => ['required', 'string', 'min:3','max:255'],
+            'display' => ['required', 'boolean'],
+            'image' => ['required', 'image', 'mimes:jpg,png,svg', 'max:10000'],
+            'audio' => ['required', 'file', 'mimes:mp3,wav', 'max:10000'],
         ]);
 
         return redirect()->back();
