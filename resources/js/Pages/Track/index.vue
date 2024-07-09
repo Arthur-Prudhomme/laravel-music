@@ -1,15 +1,14 @@
 <template>
 	<MusicLayout>
 		<template #content>
-			<div>
-				<h1>Liste de mes tracks</h1>
-				<br />
+			<h1>Liste de mes tracks</h1>
+			<br />
+			<div class="grid grid-cols-4 gap-4">
 				<Track
 					v-for="track in tracks"
 					:key="track.uuid"
-					:title="track.title"
-					:artist="track.artist"
-					:image="track.image"
+					:track="track"
+					@played="play"
 				/>
 			</div>
 		</template>
@@ -26,5 +25,13 @@ export default {
 		Track,
 	},
 	props: { tracks: Array },
+	methods: {
+		play(track) {
+			const url = "storage/" + track.music;
+
+			let audio = new Audio(url);
+			audio.play();
+		},
+	},
 };
 </script>
