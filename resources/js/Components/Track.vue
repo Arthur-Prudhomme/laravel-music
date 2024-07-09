@@ -16,9 +16,18 @@
 		<div class="flex w-full justify-between mt-2">
 			<Link
 				:href="route('tracks.edit', { track: track })"
-				class="bg-lime-600 hover:bg-lime-400 rounded py-2 px-4 font-bold text-white"
+				class="bg-lime-600 hover:bg-lime-800 rounded py-2 px-4 font-bold text-white"
 			>
 				Modifier
+			</Link>
+
+			<Link
+				:href="route('tracks.destroy', { track: track })"
+				as="button"
+				method="delete"
+				class="bg-red-500 hover:bg-red-700 rounded py-2 px-4 font-bold text-white"
+			>
+				Supprimer
 			</Link>
 		</div>
 	</div>

@@ -73,7 +73,7 @@ class TrackController extends Controller
         return redirect()->route('tracks.index');
     }
 
-    public function destroy(){
-        dd('destroy');
+    public function destroy(Track $track){
+        $track->delete();
     }
 }
