@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TrackController;
+use App\Http\Controllers\PlaylistController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -35,6 +36,16 @@ Route::name('tracks.')->prefix('tracks')->controller(TrackController::class)->gr
     Route::get('/{track}/edit', 'edit')->name('edit');
     Route::put('/{track}', 'update')->name('update');
     Route::delete('/{track}', 'destroy')->name('destroy');
+});
+
+Route::name('playlists.')->prefix('playlists')->controller(PlaylistController::class)->group(function (){
+    Route::get('/', 'index')->name('index');
+    Route::get('/create', 'create')->name('create');
+    Route::post('/', 'store')->name('store');
+    Route::get('/{playlist}', 'show')->name('show');
+    Route::get('/{playlist}/edit', 'edit')->name('edit');
+    Route::put('/{playlist}', 'update')->name('update');
+    Route::delete('/{playlist}', 'destroy')->name('destroy');
 });
 
 //fait la même chose que le group mais plus vite

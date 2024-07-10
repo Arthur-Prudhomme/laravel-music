@@ -21,6 +21,7 @@
 					v-for="track in filteredTracks"
 					:key="track.uuid"
 					:track="track"
+					:active="currentTrack == track.uuid"
 					@played="play"
 				/>
 			</div>

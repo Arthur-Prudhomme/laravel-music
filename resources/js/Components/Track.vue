@@ -1,5 +1,6 @@
 <template>
 	<div
+		:class="{ 'border border-blue-500': active }"
 		class="bg-slate-300 w-fit p-2 m-1 rounded-lg flex flex-col justify-between"
 	>
 		<img :src="'storage/' + track.image" alt="track img" />
@@ -37,7 +38,13 @@
 export default {
 	name: "Track",
 	emits: ["played"],
-	props: ["track"],
+	props: {
+		active: {
+			type: Boolean,
+			default: false,
+		},
+		track: Object,
+	},
 	methods: {
 		handleClick() {
 			this.$emit("played", this.track);
