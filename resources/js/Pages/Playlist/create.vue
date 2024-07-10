@@ -34,25 +34,40 @@
 					:disabled="form.processing"
 				/>
 			</form>
+
+			<div v-for="track in tracks" :key="track.uuid">
+				<input
+					type="checkbox"
+					name="tracks"
+					:id="track.uuid"
+					:value="track.uuid"
+					v-model="form.tracks"
+				/>
+				<label :for="track.uuid">{{ track.title }}</label>
+			</div>
 		</template>
 	</MusicLayout>
 </template>
 
 <script>
 import MusicLayout from "@/Layouts/MusicLayout.vue";
+import Track from "@/Components/Track.vue";
 
 export default {
 	name: "Create",
 	components: {
 		MusicLayout,
+		Track,
 	},
 	data() {
 		return {
 			form: this.$inertia.form({
 				title: "",
+				tracks: [],
 			}),
 		};
 	},
+	props: { tracks: Array },
 	methods: {
 		submit() {
 			this.form.post(route("playlists.store"));

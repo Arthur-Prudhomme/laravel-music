@@ -7,6 +7,7 @@ use App\Models\Playlist;
 use Inertia\Inertia;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Track;
 
 class PlaylistController extends Controller
 {
@@ -21,15 +22,19 @@ class PlaylistController extends Controller
 
     public function create(){
         // dd('create');
-        return Inertia::render('Playlist/create');
+
+        $tracks = Track::where('display', true)->get();
+        return Inertia::render('Playlist/create',['tracks'=>$tracks]);
     }
 
     public function store(Request $request){
         // dd('store');
         $request->validate([
-            'title' => ['required', 'string', 'min:5','max:255']
+            'title' => ['required', 'string', 'min:5','max:255'],
+            'tracks' => ['required', 'array'],
+            'tracks.*' => ['required', 'string']
         ]);
-
+dd('ok');
         Playlist::create([
             'uuid' =>  'ply-' . Str::uuid(),
             'user_id' =>  $request->user()->id,
