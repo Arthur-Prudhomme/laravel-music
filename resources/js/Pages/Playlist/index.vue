@@ -10,6 +10,12 @@
 					Ajouter une playlist
 				</Link>
 			</div>
+
+			<div class="grid grid-cols-4 gap-4">
+				<div v-for="playlist in playlists" :key="playlist.title">
+					{{ playlist.title }}
+				</div>
+			</div>
 		</template>
 	</MusicLayout>
 </template>

@@ -14,4 +14,9 @@ class Playlist extends Model
         'user_id',
         'title'
     ];
+
+    public function user() : BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }

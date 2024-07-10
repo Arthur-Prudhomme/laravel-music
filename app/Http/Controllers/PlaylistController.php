@@ -6,12 +6,16 @@ use Illuminate\Http\Request;
 use App\Models\Playlist;
 use Inertia\Inertia;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class PlaylistController extends Controller
 {
     public function index(){
         // dd('index');
-        $playlists = Playlist::all();
+        $user = auth()->user();
+        $playlists = $user->playlists;
+        // $playlists = Playlist::all();
+        // $playlists = Playlist::where('user_id', Auth::user()->id)->orderby('title')->get();
         return Inertia::render('Playlist/index',['playlists' => $playlists]);
     }
 
