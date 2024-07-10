@@ -6,7 +6,7 @@
 			class="shadow border rounded w-full"
 		/>
 		<br />
-		<div class="grid grid-cols-4 gap-4">
+		<div class="grid grid-cols-6 gap-4">
 			<Track
 				v-for="track in filteredTracks"
 				:key="track.uuid"
