@@ -1,0 +1,62 @@
+<template>
+	<MusicLayout>
+		<template #content>
+			<div class="flex flex-row justify-between mb-5">
+				<h1 class="text-4xl font-extrabold">Créer une playlist</h1>
+				<Link
+					:href="route('playlists.index')"
+					class="bg-blue-500 hover:bg-blue-700 rounded py-2 px-4 font-bold text-white"
+				>
+					Retour
+				</Link>
+			</div>
+
+			<form @submit.prevent="submit">
+				<!-- title -->
+				<div class="mb-3">
+					<label for="title" class="block">Titre</label>
+					<input
+						v-model="form.title"
+						id="title"
+						placeholder="Titre"
+						type="text"
+						:class="{ 'border-red-500': form.errors.title }"
+					/>
+					<p class="text-red-500 text-xs italic">{{ form.errors.title }}</p>
+				</div>
+				<input
+					type="submit"
+					value="Créer la playlist"
+					class="rounded py-2 px-4 font-bold text-white mt-5"
+					:class="[
+						form.processing ? 'bg-gray-500' : 'bg-blue-500 hover:bg-blue-700',
+					]"
+					:disabled="form.processing"
+				/>
+			</form>
+		</template>
+	</MusicLayout>
+</template>
+
+<script>
+import MusicLayout from "@/Layouts/MusicLayout.vue";
+
+export default {
+	name: "Create",
+	components: {
+		MusicLayout,
+	},
+	data() {
+		return {
+			form: this.$inertia.form({
+				title: "",
+			}),
+		};
+	},
+	methods: {
+		submit() {
+			this.form.post(route("playlists.store"));
+		},
+	},
+};
+</script>

@@ -20,8 +20,19 @@ class PlaylistController extends Controller
         return Inertia::render('Playlist/create');
     }
 
-    public function store(){
-        dd('store');
+    public function store(Request $request){
+        // dd('store');
+        $request->validate([
+            'title' => ['required', 'string', 'min:5','max:255']
+        ]);
+
+        Playlist::create([
+            'uuid' =>  'ply-' . Str::uuid(),
+            'user_id' =>  $request->user()->id,
+            'title' => $request->title,
+        ]);
+ 
+        return redirect()->route('playlists.index');
     }
 
     public function show(){

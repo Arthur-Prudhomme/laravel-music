@@ -24,6 +24,16 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+
+    Route::name('playlists.')->prefix('playlists')->controller(PlaylistController::class)->group(function (){
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
+        Route::get('/{playlist}', 'show')->name('show');
+        Route::get('/{playlist}/edit', 'edit')->name('edit');
+        Route::put('/{playlist}', 'update')->name('update');
+        Route::delete('/{playlist}', 'destroy')->name('destroy');
+    }); //pour rediriger direct sur login
 });
 
 Route::get('/test',[HomeController::class, 'test'])->name('test');
@@ -38,15 +48,7 @@ Route::name('tracks.')->prefix('tracks')->controller(TrackController::class)->gr
     Route::delete('/{track}', 'destroy')->name('destroy');
 });
 
-Route::name('playlists.')->prefix('playlists')->controller(PlaylistController::class)->group(function (){
-    Route::get('/', 'index')->name('index');
-    Route::get('/create', 'create')->name('create');
-    Route::post('/', 'store')->name('store');
-    Route::get('/{playlist}', 'show')->name('show');
-    Route::get('/{playlist}/edit', 'edit')->name('edit');
-    Route::put('/{playlist}', 'update')->name('update');
-    Route::delete('/{playlist}', 'destroy')->name('destroy');
-});
+
 
 //fait la même chose que le group mais plus vite
 // Route::ressource('tracks', TrackController::class);
