@@ -42,7 +42,14 @@
 						<td class="px-6 py-4">
 							{{ $moment(playlist.created_at).format("DD/MM/YYYY hh:mm:ss") }}
 						</td>
-						<td class="px-6 py-4">?</td>
+						<td class="px-6 py-4">
+							<Link
+								:href="route('playlists.show', { playlist: playlist })"
+								class="bg-blue-500 hover:bg-blue-700 rounded py-2 px-4 font-bold text-white"
+							>
+								Voir
+							</Link>
+						</td>
 					</tr>
 				</tbody>
 			</table>

@@ -50,7 +50,7 @@ class TrackController extends Controller
         return redirect()->route('tracks.index');
     }
 
-    public function show(){
+    public function show(Playlist $playlist){
         dd('show');
     }
 

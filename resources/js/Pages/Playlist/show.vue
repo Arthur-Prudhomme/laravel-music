@@ -2,12 +2,12 @@
 	<MusicLayout>
 		<template #content>
 			<div class="flex flex-row justify-between mb-5">
-				<h1 class="text-4xl font-extrabold">Liste de mes tracks</h1>
+				<h1 class="text-4xl font-extrabold">Détail de {{ playlist.title }}</h1>
 				<Link
-					:href="route('tracks.create')"
+					:href="route('playlists.index')"
 					class="bg-blue-500 hover:bg-blue-700 rounded py-2 px-4 font-bold text-white"
 				>
-					Ajouter une musique
+					Retour
 				</Link>
 			</div>
 
@@ -21,11 +21,11 @@ import MusicLayout from "@/Layouts/MusicLayout.vue";
 import TrackList from "@/Components/TrackList.vue";
 
 export default {
-	name: "Index",
+	name: "Show",
 	components: {
 		MusicLayout,
 		TrackList,
 	},
-	props: { tracks: Array },
+	props: { tracks: Array, playlist: Object },
 };
 </script>

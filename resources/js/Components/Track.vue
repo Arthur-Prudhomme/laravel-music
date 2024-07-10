@@ -3,7 +3,7 @@
 		:class="{ 'border border-blue-500': active }"
 		class="bg-slate-300 w-fit p-2 m-1 rounded-lg flex flex-col justify-between"
 	>
-		<img :src="'storage/' + track.image" alt="track img" />
+		<img :src="'/storage/' + track.image" alt="track img" />
 		<p>
 			<b>{{ track.title }}</b> - ({{ track.artist }})
 		</p>
