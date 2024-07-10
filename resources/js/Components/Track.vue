@@ -9,13 +9,14 @@
 		</p>
 		<button
 			@click="handleClick()"
-			class="bg-slate-500 p-2 hover:bg-blue-500 w-full rounded-xl mt-2"
+			class="bg-blue-500 p-2 hover:bg-blue-400 w-full rounded-xl mt-2"
 		>
 			Play
 		</button>
 
 		<div class="flex w-full justify-between mt-2">
 			<Link
+				v-if="$page.props.isAdmin"
 				:href="route('tracks.edit', { track: track })"
 				class="bg-lime-600 hover:bg-lime-800 rounded py-2 px-4 font-bold text-white"
 			>
@@ -23,6 +24,7 @@
 			</Link>
 
 			<Link
+				v-if="$page.props.isAdmin"
 				:href="route('tracks.destroy', { track: track })"
 				as="button"
 				method="delete"

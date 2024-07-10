@@ -6,6 +6,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TrackController;
 use App\Http\Controllers\PlaylistController;
+use App\Http\Middleware\IsAdmin;
 
 Route::middleware([
     'auth:sanctum',
@@ -13,7 +14,7 @@ Route::middleware([
     'verified',
 ])->group(function () {
     //pour rediriger direct sur login
-    Route::name('tracks.')->prefix('tracks')->controller(TrackController::class)->group(function (){
+    Route::name('tracks.')->prefix('tracks')->controller(TrackController::class)->middleware(IsAdmin::class)->group(function (){
         Route::get('/create', 'create')->name('create');
         Route::post('/', 'store')->name('store');
         Route::get('/{track}', 'show')->name('show');
