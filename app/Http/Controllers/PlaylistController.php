@@ -15,7 +15,7 @@ class PlaylistController extends Controller
     public function index(){
         // dd('index');
         $user = auth()->user();
-        $playlists = $user->playlists;
+        $playlists = $user->playlists()->withCount('tracks')->get();
         // $playlists = Playlist::all();
         // $playlists = Playlist::where('user_id', Auth::user()->id)->orderby('title')->get();
         return Inertia::render('Playlist/index',['playlists' => $playlists]);
