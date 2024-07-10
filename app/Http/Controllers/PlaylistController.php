@@ -8,6 +8,7 @@ use Inertia\Inertia;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Track;
+use Illuminate\ValidationException;
 
 class PlaylistController extends Controller
 {
@@ -34,12 +35,19 @@ class PlaylistController extends Controller
             'tracks' => ['required', 'array'],
             'tracks.*' => ['required', 'string']
         ]);
-dd('ok');
-        Playlist::create([
+
+        $tracks = Track::whereIn('uuid', $request->tracks)->where('display', true)->get();
+        if($tracks->count() !== count($request->tracks)){
+            throw ValidationException::withMessage(['tracks' => 'Une musique n\'existe  pas']);
+        }
+
+        $playlist = Playlist::create([
             'uuid' =>  'ply-' . Str::uuid(),
             'user_id' =>  $request->user()->id,
             'title' => $request->title,
         ]);
+        
+        $playlist->tracks()->attach($tracks->pluck('id'));
  
         return redirect()->route('playlists.index');
     }

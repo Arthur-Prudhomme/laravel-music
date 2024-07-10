@@ -44,6 +44,7 @@
 					v-model="form.tracks"
 				/>
 				<label :for="track.uuid">{{ track.title }}</label>
+				<p class="text-red-500 text-xs italic">{{ form.errors.tracks }}</p>
 			</div>
 		</template>
 	</MusicLayout>
