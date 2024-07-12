@@ -6,6 +6,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TrackController;
 use App\Http\Controllers\PlaylistController;
+use App\Http\Controllers\ApiController;
 use App\Http\Middleware\IsAdmin;
 
 Route::middleware([
@@ -31,11 +32,13 @@ Route::middleware([
         Route::get('/{playlist}/edit', 'edit')->name('edit');
         Route::put('/{playlist}', 'update')->name('update');
         Route::delete('/{playlist}', 'destroy')->name('destroy');
-    }); 
+    });
+
+    Route::resource('apikeys', ApiController::class);
     
 });
 
-Route::get('/test',[HomeController::class, 'test'])->name('test');
+// Route::get('/test',[HomeController::class, 'test'])->name('test');
 
 
 Route::get('/', [TrackController::class, 'index'])->name('tracks.index');
