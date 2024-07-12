@@ -74,6 +74,7 @@ class TrackController extends Controller
     }
 
     public function destroy(Track $track){
+        dd($track);
         $track->delete();
     }
 }

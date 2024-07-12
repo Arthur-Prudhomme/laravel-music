@@ -15,9 +15,9 @@ class ApiController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $apikeys = $user->apikeys()->get();
+        $apiKeys = $user->apikeys()->get();
 
-        return Inertia::render('ApiKeys/index',['apikeys' => $apikeys]);
+        return Inertia::render('ApiKeys/index',['apiKeys' => $apiKeys]);
     }
 
     /**
@@ -43,7 +43,7 @@ class ApiController extends Controller
             'uuid' =>  'api-' . Str::uuid(),
              'name' => $request->name,
              'user_id' => $request->user()->id,
-             '' => substr(str_shuffle(str_repeat($pool, 5)), 0, 25)
+             'key' => substr(str_shuffle(str_repeat($pool, 5)), 0, 35)
          ]);
          
         return redirect()->route('apikeys.index');
@@ -52,8 +52,8 @@ class ApiController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(ApiKey $apiKey)
     {
-        //
+        $apiKey->delete();
     }
 }

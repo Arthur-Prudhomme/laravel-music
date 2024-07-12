@@ -33,8 +33,13 @@ Route::middleware([
         Route::put('/{playlist}', 'update')->name('update');
         Route::delete('/{playlist}', 'destroy')->name('destroy');
     });
-
-    Route::resource('apikeys', ApiController::class);
+    
+    Route::name('apikeys.')->prefix('apikeys')->controller(ApiController::class)->group(function (){
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
+        Route::delete('/{apiKey}', 'destroy')->name('destroy');
+    });
     
 });
 

@@ -17,6 +17,10 @@ class ApiKey extends Model
         'key',
     ];
 
+    public function getRouteKeyName(){
+        return 'uuid';
+    }
+
     public function user() : BelongsTo
     {
         return $this->belongsTo(User::class);
