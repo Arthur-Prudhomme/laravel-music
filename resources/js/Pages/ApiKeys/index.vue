@@ -10,11 +10,8 @@
 					Ajouter une clé API
 				</Link>
 			</div>
-			<!-- <div class="grid grid-cols-4 gap-4">
-				<div v-for="playlist in playlists" :key="playlist.title">
-					{{ playlist.title }}
-				</div>
-			</div> -->
+
+			<div v-for="apikey in apikeys">{{ apikey }}</div>
 		</template>
 	</MusicLayout>
 </template>
@@ -27,6 +24,6 @@ export default {
 	components: {
 		MusicLayout,
 	},
-	props: {},
+	props: { apikeys: Array },
 };
 </script>

@@ -10,11 +10,30 @@
 					Retour
 				</Link>
 			</div>
-			<!-- <div class="grid grid-cols-4 gap-4">
-				<div v-for="playlist in playlists" :key="playlist.title">
-					{{ playlist.title }}
+
+			<form @submit.prevent="submit">
+				<!-- title -->
+				<div class="mb-3">
+					<label for="name" class="block">Nom</label>
+					<input
+						v-model="form.name"
+						id="name"
+						placeholder="Nom"
+						type="text"
+						:class="{ 'border-red-500': form.errors.name }"
+					/>
+					<p class="text-red-500 text-xs italic">{{ form.errors.name }}</p>
 				</div>
-			</div> -->
+				<input
+					type="submit"
+					value="Créer"
+					class="rounded py-2 px-4 font-bold text-white mt-5"
+					:class="[
+						form.processing ? 'bg-gray-500' : 'bg-blue-500 hover:bg-blue-700',
+					]"
+					:disabled="form.processing"
+				/>
+			</form>
 		</template>
 	</MusicLayout>
 </template>
@@ -23,10 +42,22 @@
 import MusicLayout from "@/Layouts/MusicLayout.vue";
 
 export default {
-	name: "Index",
+	name: "Create",
 	components: {
 		MusicLayout,
 	},
 	props: {},
+	data() {
+		return {
+			form: this.$inertia.form({
+				name: "",
+			}),
+		};
+	},
+	methods: {
+		submit() {
+			this.form.post(route("apikeys.store"));
+		},
+	},
 };
 </script>
